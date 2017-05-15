@@ -84,3 +84,27 @@ for (r in (nrow(micros)-1):1) {
 	}
 }
 
+micros <- micros[-1,]
+micros$site <- gsub(" ", "", micros$site)
+inFileS <- ""
+currSite <- ""
+idNum <- 1
+for (r in 1:nrow(micros)) {
+	if (r==1) {
+		inFileS <- paste("EcoGen data project microsatellites\n", paste(colnames(micros)[2:ncol(micros)], collapse=","),"\n", sep="")
+	}
+	if (micros$site[r] != currSite) {
+		inFileS <- paste(inFileS, "POP\n", sep="")
+		currSite <- micros$site[r]
+		idNum <- 1
+	}
+	inFileS <- paste(inFileS, micros$site[r], "_", idNum, ", ",
+					 paste(micros[r, 2:ncol(micros)], collapse=" "), sep="")
+
+	if (r < nrow(micros)) {
+		inFileS <- paste(inFileS, "\n", sep="")
+	}
+	idNum <- idNum + 1
+}
+
+write(inFileS, file="genepop_input.txt", append=FALSE)
