@@ -1,4 +1,4 @@
-data <- read.csv("data.csv", stringsAsFactors=FALSE)
+data <- read.csv("Data/data.csv", stringsAsFactors=FALSE)
 
 for (c in 1:ncol(data)) {
 	data[which(data[,c]=="x"), c] <- data[4,c]
@@ -107,4 +107,4 @@ for (r in 1:nrow(micros)) {
 	idNum <- idNum + 1
 }
 
-write(inFileS, file="genepop_input.txt", append=FALSE)
+write(inFileS, file="Output/genepop_input.txt", append=FALSE)

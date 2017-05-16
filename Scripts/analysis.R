@@ -1,8 +1,8 @@
 require("diveRsity")
 
-stats <- basicStats(infile="genepop_input.txt", outfile="HWE_output.txt")
-divStats <- diffCalc(infile="genepop_input.txt", outfile="FST_output.txt", fst=TRUE, pairwise=TRUE)
-hw <- divBasic(infile="genepop_input.txt", outfile="FST_output.txt", HWEexact=TRUE, mcRep=10000, bootstraps=1000)
+stats <- basicStats(infile="Output/genepop_input.txt", outfile="Output/HWE_output")
+divStats <- diffCalc(infile="Output/genepop_input.txt", outfile="Output/FST_output", fst=TRUE, pairwise=TRUE)
+hw <- divBasic(infile="Output/genepop_input.txt", outfile="Output/FST_output.txt", HWEexact=TRUE, mcRep=10000, bootstraps=1000)
 
 
 hwTest <- hw$HWE
@@ -45,6 +45,6 @@ fst <- ggplot() +
 	theme(panel.grid=element_blank(), panel.background=element_rect(fill="white"),
 		  axis.text=element_text(family="Arial", size=12), axis.ticks=element_blank())
 
-ggsave("fst_table.png", fst, width=6, height=6)
+ggsave("Figures/fst_table.png", fst, width=6, height=6)
 
-migrate <- divMigrate(infile="genepop_input.txt", plot_network=TRUE)
+migrate <- divMigrate(infile="Output/genepop_input.txt", plot_network=TRUE)
